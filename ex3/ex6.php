@@ -17,14 +17,14 @@ function getAllPosts() : array {
     $result = [];
     foreach ($lines as $line) {
         [$title, $text] = explode(";", trim($line));
-        $result[] = new Post($title, $text);
+        $result[] = new Post(urldecode($title), urldecode($text));
     }
     return $result;
 }
 
 function savePost(Post $post) : void {
 
-    $line = $post->title.";".$post->text."\n";
+    $line = urlencode($post->title).";".urlencode($post->text)."\n";
     file_put_contents(DATA_FILE, $line, FILE_APPEND);
 }
 

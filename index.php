@@ -7,7 +7,7 @@ if ($booksData)
 {
     foreach ($booksData as $line) {
         [$title, $isRead, $grade] = explode(';', trim($line));
-        $content .= '<tr><td class="first_column"><a href="">' . $title .'</a></td><td class="second_column">' . $isRead . '</td><td>';
+        $content .= '<tr><td class="first_column"><a href="">' . urldecode($title) .'</a></td><td class="second_column">' . $isRead . '</td><td>';
         foreach (range(1, 5) as $star) {
             if (intval($grade) >= $star)
                 $content .= "<span class='checked-stars' >★</span>\n";

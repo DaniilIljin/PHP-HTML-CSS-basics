@@ -1,8 +1,8 @@
 <?php
 
-$title = $_POST['title'] ?? '-';
-$isRead = $_POST['isRead'] ?? 'no';
-$grade = $_POST['grade'] ?? '0';
+$title = $_GET['title'] ?? '-';
+$isRead = $_GET['isRead'] ?? 'no';
+$grade = $_GET['grade'] ?? '0';
 
 const BOOK_FILE = __DIR__."/../data/books.txt";
 $content = $title. ';' .$isRead. ';' .$grade . PHP_EOL;

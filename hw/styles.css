@@ -76,15 +76,15 @@ form table{
 .right {
     text-align: right;
 }
-.first_name {
+.first_column {
     width: 37%;
     text-align: left;
 }
-.second_name{
+.second_column{
     width: 50%;
     text-align: left;
 }
-.hinne {
+.grade_column {
     width: 13%;
     text-align: left;
 }
@@ -115,4 +115,11 @@ form input[type="submit"] {
 .grid-container {
     display: grid;
     grid-template-columns: auto auto auto auto auto;
+}
+
+.checked-stars {
+    color: gold;
+}
+.unchecked-stars {
+    color: darkgrey;
 }

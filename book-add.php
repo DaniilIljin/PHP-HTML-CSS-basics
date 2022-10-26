@@ -152,3 +152,4 @@ if (isset($_GET["id"])){
 <footer>ICD0007 Näidisrakendus</footer>
 </body>
 </html>
+ 

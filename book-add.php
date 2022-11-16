@@ -21,7 +21,7 @@ if (isset($_POST["deleteButton"])){
 if (isset($_POST["submitButton"])){
     $author_id = $_POST["author1"] ?? "14";
     if (intval($author_id) == null){
-        $author_id = "14";
+        $author_id = "56";
     }
     $readed = $_POST['isRead'] ?? "no";
     if ($readed != "no" && $readed != "yes"){
@@ -48,7 +48,6 @@ if (isset($_POST["submitButton"])){
 $authors = getAllAuthors();
 if (isset($_GET["id"])){
     $book = finBookById($_GET["id"]);
-    $bookAuthor = finAuthorById($book->author_id);
 }
 ?>
 <!DOCTYPE html>
@@ -81,8 +80,8 @@ if (isset($_GET["id"])){
                 <select id="author-select1" name="author1">
                     <?php foreach ($authors as $author): ?>
                         <option class="option" value="<?=$author->id?>"<?php
-                        if (isset($bookAuthor)){
-                            if ($author->id == $bookAuthor->id){
+                        if (isset($book)){
+                            if ($author->id == $book->author_id){
                                 echo "selected";
                             }
                         }

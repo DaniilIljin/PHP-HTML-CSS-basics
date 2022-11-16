@@ -8,7 +8,6 @@ if (isset($_SESSION["messageb"])){
         $message = showMessage($_SESSION["messageb"]);
         $_SESSION["messageb"] = "";
     }
-
 }
 $books = getAllBooks();
 if ($books == null){
@@ -40,8 +39,7 @@ if ($books == null){
     ?>
     <table id="table">
         <?php foreach ($books as $book): ?>
-        <?php $author = finAuthorById($book->author_id)?>
-            <tr><td class="first_column"><a href="book-add.php?id=<?= $book->id ?>"><?= urldecode($book->title) ?></a></td><td class="second_column"> <?php echo $author->firstName." ".$author->lastName?> </td>
+            <tr><td class="first_column"><a href="book-add.php?id=<?= $book->id ?>"><?= urldecode($book->title) ?></a></td><td class="second_column"> <?php echo $book->authorsName?> </td>
                 <td class="grade_column"><?= numberOfStars($book -> rating) ?></td></tr>
         <?php endforeach; ?>
     </table>

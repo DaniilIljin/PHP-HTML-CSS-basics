@@ -7,6 +7,7 @@ class Book
     public string $author_id;
     public string $readed;
     public string $rating;
+    public string $authorsName;
 
     public function __construct(string $title, string $author_id, string $readed, string $rating) {
         $this->title = $title;

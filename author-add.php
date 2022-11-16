@@ -1,6 +1,7 @@
 <?php
 require_once "hw/functianality/Book.php";
 require_once "hw/functianality/functions.php";
+require_once "ex5/connection.php";
 
 $author = null;
 $message = null;
@@ -23,6 +24,11 @@ if (isset($_POST["submitButton"])){
     $firstName = $_POST['firstName'];
     $secondName = $_POST['lastName'];
     $rating = $_POST["grade"] ?? "0";
+    try {
+        (int)$rating;
+    }catch (Exception){
+        $rating = "0";
+    }
     $author = new Author($firstName, $secondName, $rating);
     if($_POST["id"] !== ""){
         $author->id = $_POST["id"];

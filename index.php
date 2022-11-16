@@ -40,7 +40,8 @@ if ($books == null){
     ?>
     <table id="table">
         <?php foreach ($books as $book): ?>
-            <tr><td class="first_column"><a href="book-add.php?id=<?= $book->id ?>"><?= urldecode($book->title) ?></a></td><td class="second_column"> <?= $book->readed ?> </td>
+        <?php $author = finAuthorById($book->author_id)?>
+            <tr><td class="first_column"><a href="book-add.php?id=<?= $book->id ?>"><?= urldecode($book->title) ?></a></td><td class="second_column"> <?php echo $author->firstName." ".$author->lastName?> </td>
                 <td class="grade_column"><?= numberOfStars($book -> rating) ?></td></tr>
         <?php endforeach; ?>
     </table>

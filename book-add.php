@@ -12,15 +12,26 @@ if (isset($_POST["deleteButton"])){
         header('Location: ' . $url);
     } else {
         $message = showErrorMessage("See raamat puudub nimekirjas, ei saa kustutada seda. :(");
+        $author_id = $_POST["author1"] ?? "2";
         $readed = $_POST['isRead'] ?? "no";
         $rating = $_POST["grade"] ?? "0";
-        $book = new Book($_POST['title'], $readed, $rating);
+        $book = new Book($_POST['title'],$author_id, $readed, $rating);
     }
 }
 if (isset($_POST["submitButton"])){
+    $author_id = $_POST["author1"] ?? "14";
+    if (intval($author_id) == null){
+        $author_id = "14";
+    }
     $readed = $_POST['isRead'] ?? "no";
+    if ($readed != "no" && $readed != "yes"){
+        $readed = "no";
+    }
     $rating = $_POST["grade"] ?? "0";
-    $book = new Book($_POST['title'], $readed, $rating);
+    if (strlen($rating)>1){
+        $rating = "0";
+    }
+    $book = new Book($_POST['title'],$author_id, $readed, $rating);
     if($_POST["id"] !== ""){
         $book->id = $_POST["id"];
     }
@@ -34,8 +45,10 @@ if (isset($_POST["submitButton"])){
         $message = showErrorMessage("Raamatu nimetus peab sisalduma vähemalt 3 tähte ja maksimaalselt 23. :(");
     }
 }
+$authors = getAllAuthors();
 if (isset($_GET["id"])){
     $book = finBookById($_GET["id"]);
+    $bookAuthor = finAuthorById($book->author_id);
 }
 ?>
 <!DOCTYPE html>
@@ -54,7 +67,7 @@ if (isset($_GET["id"])){
         print $message ?? "";
     ?>
     <form method="post" action="book-add.php">
-        <input type="hidden" name="id" value=<?php echo $book->id ?? ""; ?>>
+        <input type="hidden" name="id" value=<?php echo $book->id ?? "" ?>>
         <div class="flex-container">
             <div class="field_name"><label for="fn">Pealkiri:</label></div>
             <div><input name="title" type="text" id="fn" value="<?php
@@ -65,10 +78,16 @@ if (isset($_GET["id"])){
         <div class="flex-container">
             <div class="field_name"><label for="author-select1">Author1</label>:</div>
             <div>
-                <select id="author-select1">
-                    <option>Name</option>
-                    <option>Option 1</option>
-                    <option>Option 2</option>
+                <select id="author-select1" name="author1">
+                    <?php foreach ($authors as $author): ?>
+                        <option class="option" value="<?=$author->id?>"<?php
+                        if (isset($bookAuthor)){
+                            if ($author->id == $bookAuthor->id){
+                                echo "selected";
+                            }
+                        }
+                        ?>><?php echo $author->firstName." ".$author->lastName?></option>
+                    <?php endforeach; ?>
                 </select>
             </div>
         </div>
@@ -76,9 +95,9 @@ if (isset($_GET["id"])){
             <div class="field_name"><label for="author-select2">Author2</label>:</div>
             <div>
                 <select id="author-select2">
-                    <option>Name</option>
-                    <option>Option 1</option>
-                    <option>Option 2</option>
+                    <option name="author2">Name</option>
+                    <option name="author2">Option 1</option>
+                    <option name="author2">Option 2</option>
                 </select>
             </div>
         </div>

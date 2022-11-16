@@ -40,8 +40,10 @@ if ($authors == null){
       ?>
     <table id="table">
     <?php foreach ($authors as $author): ?>
-        <tr><td class="first_column"><a href="author-add.php?id=<?= $author->id ?>"><?=urldecode($author->firstName)?></a></td><td class="second_column"><?=urldecode($author->lastName)?> </td>
-            <td class="grade_column"><?= numberOfStars($author->rating)?></td></tr>
+    <?php if ($author->firstName !="Autor" && $author->lastName !="puudub"){
+        echo '<tr><td class="first_column"><a href="author-add.php?id='.$author->id.'">'.$author->firstName.'</a></td><td class="second_column">'.$author->lastName.'</td>
+        <td class="grade_column">'.numberOfStars($author->rating).'</td></tr>';
+        }?>
     <?php endforeach; ?>
 </table>
 

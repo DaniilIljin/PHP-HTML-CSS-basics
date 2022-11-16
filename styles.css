@@ -12,6 +12,7 @@ body {
     margin-right: auto;
     margin-bottom: 20px;
 }
+
 nav a {
     text-decoration: none;
     color: white;
@@ -92,6 +93,7 @@ select, option{
     margin-left: 1rem;
     font-size: 14px;
     background-color: green;
+    color: white;
     width: 15.4rem;
 }
 #separator {

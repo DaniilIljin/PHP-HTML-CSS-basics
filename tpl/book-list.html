@@ -1,0 +1,23 @@
+<table>
+  <tr>
+    <th class="first_column">Pealkiri</th>
+    <th class="second_column">Autorid</th>
+    <th class="grade_column">Hinne</th>
+  </tr>
+</table>
+<div id="separator"></div>
+<div tpl-if="$message" class="message">{{ $message }}</div>
+<div tpl-if="$error" class="errorMessage">{{ $error }}</div>
+<table id="table">
+  <tpl tpl-foreach="$books as $book">
+    <tr><td class="first_column"><a href="index.php?cmd=book_form&id={{$book->id}}">{{ $book->title }}</a></td><td class="second_column"> {{ $book->authorsName}} </td>
+      <td class="grade_column">
+        <div class="unchecked-stars">
+          <tpl tpl-foreach="range(1, 5) as $grade">
+            <span tpl-class="checked-stars if $book->rating >= $grade">★</span>
+          </tpl>
+        </div>
+      </td>
+    </tr>
+  </tpl>
+</table>

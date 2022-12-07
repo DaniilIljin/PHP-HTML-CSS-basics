@@ -1,0 +1,42 @@
+
+<div tpl-if="$error" class="errorMessage">{{ $error }}</div>
+
+<form method="post">
+  <input type="hidden" name="id" value="{{$book->id}}">
+  <div class="flex-container">
+    <div class="field_name"><label for="fn">Pealkiri:</label></div>
+    <div><input name="title" type="text" id="fn" value="{{$book->title}}"></div>
+  </div>
+  <div class="flex-container">
+    <div class="field_name"><label for="author-select1">Author1</label>:</div>
+    <div>
+      <select id="author-select1" name="author1">
+        <tpl tpl-foreach="$authors as $author">
+          <option value="{{$author->id}}" tpl-selected="$author->id === $book -> author_id">{{$author->firstName}} {{$author->lastName}}</option>
+        </tpl>
+      </select>
+    </div>
+  </div>
+  <table>
+    <tr>
+      <td class="field_name">Hinne:</td>
+      <td class="special-margin">
+        <tpl tpl-foreach="range(1, 5) as $grade">
+          <label for="grade{{$grade}}">{{$grade}}</label>
+          <input type="radio"
+                 id="grade{{$grade}}"
+                 name="grade"
+                 tpl-checked="$grade === $book -> rating"
+                 value="{{$grade}}">
+        </tpl>
+      </td>
+    </tr>
+    <tr>
+      <td class="field_name">Loetud:</td>
+      <td><input class="right" name="isRead" type="checkbox" tpl-checked="$book->readed === 'yes'" value="yes"></td>
+    </tr>
+  </table>
+  <br>
+  <input type="submit" name="submitButton" formaction="?cmd=saveBook" value="Salvesta"/>
+  <input tpl-if="isset($_GET['id']) && $_GET['id']!=null" type="submit" id="deleteButton" formaction="?cmd=deleteBook" value="Kustuta"/>
+  </form>

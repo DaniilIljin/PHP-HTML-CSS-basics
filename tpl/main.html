@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>{{ $title }}</title>
+  <link href="styles.css" rel="stylesheet">
+</head>
+<body id="{{$pageId}}">
+<nav>
+  <a href="?cmd=book_list" id="book-list-link">Raamatud</a> | <a href="?cmd=book_form" id="book-form-link">Lisa raamat</a> | <a href="?cmd=author_list" id="author-list-link">Autorid</a> | <a href="?cmd=author_form"id="author-form-link">Lisa autor</a>
+</nav>
+
+<main tpl-include="{{ $template }}"></main>
+
+<footer>ICD0007 Näidisrakendus</footer>
+</body>
+</html>

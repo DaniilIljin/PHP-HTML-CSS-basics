@@ -1,0 +1,26 @@
+<table>
+  <tr>
+    <th class="first_column">Eesnimi</th>
+    <th class="second_column">Perekonnanimi</th>
+    <th class="grade_column">Hinne</th>
+  </tr>
+</table>
+<div id="separator"></div>
+<div tpl-if="$message" class="message">{{ $message }}</div>
+<div tpl-if="$error" class="errorMessage">{{ $error }}</div>
+<table id="table">
+  <div tpl-if="$author->firstName !='Autor' && $author->lastName !='puudub'">
+    <tpl tpl-foreach="$authors as $author">
+      <tr><td class="first_column"><a href="index.php?cmd=author_form&id={{$author->id}}">{{ $author->firstName }}</a></td>
+        <td class="second_column"> {{ $author -> lastName }} </td>
+        <td class="grade_column">
+          <div class="unchecked-stars">
+            <tpl tpl-foreach="range(1, 5) as $grade">
+              <span tpl-class="checked-stars if $author->rating >= $grade">★</span>
+            </tpl>
+          </div>
+        </td>
+      </tr>
+    </tpl>
+  </div>
+</table>
